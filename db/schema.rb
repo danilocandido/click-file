@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2018_11_28_193136) do
   create_table "file_systems", force: :cascade do |t|
     t.boolean "file", default: true, null: false
     t.integer "folder_id"
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["folder_id"], name: "index_file_systems_on_folder_id"

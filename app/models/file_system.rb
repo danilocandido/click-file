@@ -5,9 +5,11 @@ class FileSystem < ApplicationRecord
 
   scope :roots, -> { where('folder_id is null') }
 
-  validates :name, presence: true, length: { minimum: 1 }
-
   has_one_attached :attached_file
+
+  def name
+    attached_file.attached? ? attached_file.filename : 'root'
+  end
 
   def children?
     files.exists?

@@ -1,4 +1,4 @@
-<%= form_with(model: file_system, local: true) do |f| %>
+<%= form_with( url: file_system_create_path(file_system, FileSystem.new), local: true) do |f| %>
   <div class="form-group">
     <%= f.label :attached_file, 'Nome' %>
     <%= f.file_field :attached_file, class: 'form-control' %>

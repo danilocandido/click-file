@@ -3,7 +3,6 @@ class CreateFileSystems < ActiveRecord::Migration[5.2]
     create_table :file_systems do |t|
       t.boolean :file, null: false, default: true
       t.references :folder, index: true
-      t.string :name
 
       t.timestamps
     end

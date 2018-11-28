@@ -1,5 +1,7 @@
 {
   "name": "click-file",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^4.1.3"
+  }
 }

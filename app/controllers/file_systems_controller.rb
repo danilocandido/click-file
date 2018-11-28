@@ -7,14 +7,14 @@ class FileSystemsController < ApplicationController
     @file_system = FileSystem.find(params[:file_system_id])
   end
 
-  def show
+  def create
+    @file_system = FileSystem.find(params[:file_system_id])
+    @file_system.files << FileSystem.new(file_system_params)
   end
-
-  def create; end
 
   private
 
   def file_system_params
-    params.require(:file_system).permit(:name, :file)
+    params.permit(:attached_file)
   end
 end
