@@ -1,0 +1,10 @@
+<%= form_with(model: file_system, local: true) do |f| %>
+  <div class="form-group">
+    <%= f.label :attached_file, 'Nome' %>
+    <%= f.file_field :attached_file, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit action_text, class: 'btn btn-primary' %>
+  </div>
+<% end %>

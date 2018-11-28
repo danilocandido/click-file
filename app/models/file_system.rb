@@ -7,6 +7,8 @@ class FileSystem < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 1 }
 
+  has_one_attached :attached_file
+
   def children?
     files.exists?
   end
