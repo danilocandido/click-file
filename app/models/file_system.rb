@@ -7,6 +7,8 @@ class FileSystem < ApplicationRecord
 
   has_one_attached :attached_file
 
+  validates :name, length: { minimum: 1 }, if: :folder?
+
   def name
     attached_file.attached? ? attached_file.filename : 'root'
   end

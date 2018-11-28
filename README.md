@@ -18,7 +18,28 @@ Give examples
 Rails 5.2.5
 > rails new click-file -T --skip-turbolinks --skip-action-mailer --skip-coffee
 
-I made a self join association in the model FileSystems, this way I can present folders, subfolders, files.
+I made a self join association in the model FileSystems, this way I can display folders, subfolders, files.
+This way I do not need a gem like ancestry.
+
+``` ruby
+class FileSystem < ApplicationRecord
+  has_many :files, class_name: 'FileSystem', foreign_key: 'folder_id'
+  belongs_to :folder, class_name: 'FileSystem', optional: true
+end
+```
+
+and the migration
+```` ruby
+def change
+  create_table :file_systems do |t|
+    t.boolean :file, null: false, default: true
+    t.references :folder, index: true
+
+    t.timestamps
+  end
+end
+```
+
 
 
 
