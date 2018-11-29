@@ -1,8 +1,8 @@
 <% if file_system.file? %>
-  <li><%= file_system.name %></li>
+  <li><%= file_system.description %></li>
 <% else %>
   <%= link_to file_system_new_path(file_system) do %>
-    <li><%= file_system.name %></li>
+    <li><%= file_system.description %></li>
   <% end %>
 <% end %>
 

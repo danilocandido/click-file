@@ -19,12 +19,18 @@ Rails 5.2.5
 > rails new click-file -T --skip-turbolinks --skip-action-mailer --skip-coffee
 
 I made a self join association in the model FileSystems, this way I can display folders, subfolders, files.
-This way I do not need a gem like ancestry.
+This way I do not need a gem.
+
+To store files I will use active_storage from Rails 5.2.
+
+> rails active_storage:install
+  rails db:migrate
 
 ``` ruby
 class FileSystem < ApplicationRecord
   has_many :files, class_name: 'FileSystem', foreign_key: 'folder_id'
-  belongs_to :folder, class_name: 'FileSystem', optional: true
+  belongs_to :folder, class_name: 'FileSystem', optional: true # this is the self-join in Model
+  has_one_attached :attached_file
 end
 ```
 
@@ -33,9 +39,7 @@ and the migration
 def change
   create_table :file_systems do |t|
     t.boolean :file, null: false, default: true
-    t.references :folder, index: true
-
-    t.timestamps
+    t.references :folder, index: true # this is the self-join in Migration
   end
 end
 ```
