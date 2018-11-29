@@ -38,6 +38,15 @@ RSpec.describe FileSystem, type: :model do
         file = build(:file)
         expect(file.description).to eq 'test-image.png'
       end
+
+      it 'inside a directory' do
+        directory_of_files = create(:directory)
+        file_exe = create(:file, folder: directory_of_files)
+        file_batch = create(:file, folder: directory_of_files)
+
+        expect(file_exe.folder).to eq directory_of_files
+        expect(directory_of_files.files).to match_array [file_exe, file_batch]
+      end
     end
   end
 end
