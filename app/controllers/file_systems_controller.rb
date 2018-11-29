@@ -1,6 +1,6 @@
 class FileSystemsController < ApplicationController
   def index
-    @files = FileSystem.roots
+    @file_systems = FileSystem.roots
   end
 
   def new

@@ -8,7 +8,7 @@ FactoryBot.define do
     end
 
     factory :folder, aliases: [:directory] do
-      name { "music_folder" }
+      sequence(:name) { |n| "music_folder#{n}" }
       file  { false }
     end
   end
