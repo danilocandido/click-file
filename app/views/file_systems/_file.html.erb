@@ -1,8 +1,5 @@
 <% if file_system.file? %>
   <li><%= file_system.description %></li>
 <% else %>
-  <%= link_to file_system_new_path(file_system) do %>
-    <li><%= file_system.description %></li>
-  <% end %>
+  <%= render partial: 'modal_upload', locals: { file_system: file_system, action_text: 'Fazer upload' } %>
 <% end %>
-
