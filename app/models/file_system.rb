@@ -5,8 +5,10 @@ class FileSystem < ApplicationRecord
 
   scope :roots, -> { where('folder_id is null') }
 
-  validates :name, presence: true, length: { minimum: 1 }, if: :folder?
-  validate :attached_file?, if: :file?
+  validates :name, length: { minimum: 1 }, if: :folder?
+
+  validate :check_attached_file, if: :file?
+  validate :only_folder_should_have_children
 
   def description
     name || attached_file.filename
@@ -22,9 +24,15 @@ class FileSystem < ApplicationRecord
 
   private
 
-  def attached_file?
+  def check_attached_file
     unless attached_file.attached?
-      errors.add(:attached_file, 'falta anexar')
+      errors.add(:attached_file, 'falta anexar um arquivo')
+    end
+  end
+
+  def only_folder_should_have_children
+    if file? && folder.try(:file?)
+      errors.add(:folder_id, 'Um arquivo não pode ter sub-arquivos, somente diretórios podem!')
     end
   end
 end

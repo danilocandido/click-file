@@ -25,4 +25,12 @@ RSpec.describe FileSystemsController, type: :controller do
       expect(assigns(:file_systems)).to match_array files_with_no_parents
     end
   end
+
+  describe 'GET #new' do
+    it 'renders :new page' do
+      folder = create(:folder)
+      get :new, :params => { file_system_id:  folder }
+      expect(response).to render_template(:new)
+    end
+  end
 end

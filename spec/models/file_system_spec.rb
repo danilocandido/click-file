@@ -22,6 +22,11 @@ RSpec.describe FileSystem, type: :model do
       it 'does not have an attached file' do
         expect(build(:file_system)).to be_invalid
       end
+
+      it 'should not have sub-files' do
+        file_exe = create(:file)
+        expect(build(:file, folder: file_exe)).to be_invalid
+      end
     end
 
     context 'valid file' do
