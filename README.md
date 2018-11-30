@@ -21,7 +21,7 @@ yarn add popper.js
 Rails 5.2.5
 > rails new click-file -T --skip-turbolinks --skip-action-mailer --skip-coffee
 
-I made a self join association in the model FileSystems, this way I can display folders, subfolders, files.
+I made a self join-association in the model FileSystems to represent a File and its *parent*, this way I can display folders, subfolders, files.
 This way I do not need a gem.
 
 To store files I will use active_storage from Rails 5.2.

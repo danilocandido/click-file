@@ -10,6 +10,10 @@ class FileSystem < ApplicationRecord
   validate :check_attached_file, if: :file?
   validate :only_folder_should_have_children
 
+  before_save do
+    self.name = nil if file?
+  end
+
   def description
     name || attached_file.filename
   end
