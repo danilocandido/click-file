@@ -14,7 +14,7 @@ class FileSystem < ApplicationRecord
     self.name = nil if file?
   end
 
-  def description
+  def text
     name || attached_file.filename
   end
 
@@ -24,6 +24,16 @@ class FileSystem < ApplicationRecord
 
   def folder?
     !file
+  end
+
+  def as_json(options = {})
+    options = {
+      id: id,
+      text: text
+    }
+    options[:children] = children unless children.empty?
+    options[:icon] = 'jstree-file' if file?
+    options
   end
 
   private

@@ -1,5 +1,19 @@
+<div id="js_tree"></div>
+<script>
+  $(function() {
+    $('#js_tree').jstree({
+      'core' : {
+        'data' : {
+          "url" : "<%= show_files_file_systems_path %>",
+          "dataType" : "json" // needed only if you do not supply JSON headers
+        }
+      }
+    });
+  });
+</script>
+
 <ul>
-  <%= nested_attributes(@file_systems.roots) %>
+  <% #= nested_attributes(@file_systems.roots) %>
 </ul>
 
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

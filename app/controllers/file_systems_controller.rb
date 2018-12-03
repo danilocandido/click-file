@@ -3,6 +3,11 @@ class FileSystemsController < ApplicationController
     @file_systems = FileSystem.roots
   end
 
+  def show_files
+    file_systems = FileSystem.roots
+    render json: file_systems
+  end
+
   def create
     @file_system = FileSystem.find(params[:file_system_id])
     @file_system.children << FileSystem.new(file_system_params.merge(file: folder?))

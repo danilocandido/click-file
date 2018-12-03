@@ -10,9 +10,9 @@ RSpec.describe FileSystem, type: :model do
     end
 
     context 'valid directory' do
-      it 'has a given description' do
+      it 'has a given text' do
         folder = build(:folder, name: 'pasta_de_imagens')
-        expect(folder.description).to eq 'pasta_de_imagens'
+        expect(folder.text).to eq 'pasta_de_imagens'
       end
     end
   end
@@ -34,9 +34,9 @@ RSpec.describe FileSystem, type: :model do
         expect(build(:file)).to be_valid
       end
 
-      it 'description is the name of the file' do
+      it 'text is the name of the file' do
         file = build(:file)
-        expect(file.description).to eq 'test-image.png'
+        expect(file.text).to eq 'test-image.png'
       end
 
       it 'inside a directory' do
