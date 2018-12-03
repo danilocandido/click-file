@@ -33,7 +33,7 @@ class FileSystem < ApplicationRecord
     }
     options[:children] = children unless children.empty?
     options[:icon] = 'jstree-file' if file?
-    options[:a_attr] = { href: "http://localhost:3000/file_systems/show_files" } 
+    options[:is_file] = folder?
     options
   end
 

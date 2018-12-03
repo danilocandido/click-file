@@ -11,14 +11,17 @@
     }).on('changed.jstree', function (e, data) {
       var i, j, r = [];
       var file_id = 1;
+      var is_folder = false;
       for(i = 0, j = data.selected.length; i < j; i++) {
         r.push(data.instance.get_node(data.selected[i]).id);
+        is_folder = data.instance.get_node(data.selected[i]).original.is_file
       }
       file_id = r.join(', ');
 
-      $('#form_create_file').attr('action', '/file_systems/'+file_id+'/create');
-
-      $('#modal-window').modal('show');
+      if (is_folder){
+        $('#form_create_file').attr('action', '/file_systems/'+file_id+'/create');
+        $('#modal-window').modal('show');
+      }
       
     }).jstree();
   });
