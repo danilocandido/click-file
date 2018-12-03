@@ -5,5 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts 'delete all files'
 FileSystem.delete_all
+puts 'create a root file'
 FileSystem.create(name: 'root_directory', file: false)
