@@ -27,10 +27,7 @@ class FileSystem < ApplicationRecord
   end
 
   def as_json(options = {})
-    options = {
-      id: id,
-      text: text
-    }
+    options = { id: id,text: text }
     options[:children] = children unless children.empty?
     options[:icon] = 'jstree-file' if file?
     options[:is_file] = folder?
