@@ -11,7 +11,7 @@ class FileSystem < ApplicationRecord
   validate :only_folder_should_have_children
 
   before_save do
-    self.name = nil if file?
+    self.name = attached_file.filename if file?
   end
 
   def text
