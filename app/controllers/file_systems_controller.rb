@@ -1,7 +1,5 @@
 class FileSystemsController < ApplicationController
-  def index
-    @file_systems = FileSystem.roots
-  end
+  def index; end
 
   def show_files
     file_systems = FileSystem.roots
@@ -12,10 +10,6 @@ class FileSystemsController < ApplicationController
     @file_system = FileSystem.find(params[:file_system_id])
     @file_system.children << FileSystem.new(file_system_params.merge(file: folder?))
     redirect_to root_path
-  end
-
-  def show_modal
-    @file_system = FileSystem.find(params[:id])
   end
 
   private

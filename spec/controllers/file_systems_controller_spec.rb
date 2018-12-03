@@ -24,5 +24,11 @@ RSpec.describe FileSystemsController, type: :controller do
       post :create, params: { file_system_id: files.last, name: 'pasta', it_is_folder: 'Salvar' }
       expect(response).to redirect_to(root_path)
     end
+
+    it 'renders root path' do
+      file = files.last
+      post :create, params: { file_system_id: file, name: 'minha_pasta', it_is_folder: 'Salvar' }
+      expect(assigns(:file_system).children.last.name).to eq 'minha_pasta'
+    end
   end
 end

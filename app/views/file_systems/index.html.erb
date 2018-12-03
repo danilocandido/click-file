@@ -5,20 +5,81 @@
       'core' : {
         'data' : {
           "url" : "<%= show_files_file_systems_path %>",
-          "dataType" : "json" // needed only if you do not supply JSON headers
+          "dataType" : "json"
         }
       }
-    });
+    }).on('changed.jstree', function (e, data) {
+      var i, j, r = [];
+      var file_id = 1;
+      for(i = 0, j = data.selected.length; i < j; i++) {
+        r.push(data.instance.get_node(data.selected[i]).id);
+      }
+      file_id = r.join(', ');
+
+      $('#form_create_file').attr('action', '/file_systems/'+file_id+'/create');
+
+      $('#modal-window').modal('show');
+      
+    }).jstree();
   });
+  
 </script>
 
-<ul>
-  <% #= nested_attributes(@file_systems.roots) %>
-</ul>
 
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">	
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Post!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_tag("/file_systems/1/create", multipart: true, method: "post", id: 'form_create_file') do %>
+          <div class="modal-body">
+
+            <div class="container" id=myGroup>
+              <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Criar Pasta
+                </a>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+                    Criar Arquivo
+                </button>
+              </p>
+
+              <div class="collapse" id="collapseExample" data-parent="#myGroup">
+                <div class="card card-body">
+                  <div class="form-group">
+                    <%= label_tag :name, 'Nome' %>
+                    <%= text_field_tag :name, nil, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                  <%= submit_tag "Salvar", name: 'it_is_folder', class: 'btn btn-primary' %>
+                </div>
+              </div>
+
+              <div class="collapse" id="collapseExample2" data-parent="#myGroup">
+                <div class="card card-body">
+                  <div class="form-group">
+                    <%= label_tag :attached_file, 'Arquivo' %>
+                    <%= file_field_tag :attached_file, class: 'form-control' %>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                  <%= submit_tag "Salvar", class: 'btn btn-primary' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
     </div>
   </div>
 </div>
