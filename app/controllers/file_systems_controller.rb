@@ -5,7 +5,7 @@ class FileSystemsController < ApplicationController
 
   def create
     @file_system = FileSystem.find(params[:file_system_id])
-    @file_system.files << FileSystem.new(file_system_params.merge(file: folder?))
+    @file_system.children << FileSystem.new(file_system_params.merge(file: folder?))
     redirect_to root_path
   end
 

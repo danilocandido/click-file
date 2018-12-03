@@ -45,7 +45,7 @@ RSpec.describe FileSystem, type: :model do
         file_batch = create(:file, folder: directory_of_files)
 
         expect(file_exe.folder).to eq directory_of_files
-        expect(directory_of_files.files).to match_array [file_exe, file_batch]
+        expect(directory_of_files.children).to match_array [file_exe, file_batch]
       end
     end
   end

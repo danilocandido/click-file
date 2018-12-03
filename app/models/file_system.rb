@@ -1,5 +1,5 @@
 class FileSystem < ApplicationRecord
-  has_many :files, class_name: 'FileSystem', foreign_key: 'folder_id'
+  has_many :children, class_name: 'FileSystem', foreign_key: 'folder_id'
   belongs_to :folder, class_name: 'FileSystem', optional: true
   has_one_attached :attached_file
 
@@ -19,7 +19,7 @@ class FileSystem < ApplicationRecord
   end
 
   def children?
-    files.exists?
+    children.exists?
   end
 
   def folder?

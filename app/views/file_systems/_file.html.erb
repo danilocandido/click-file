@@ -1,6 +1,5 @@
 <% if file_system.file? %>
   <li><%= file_system.description %></li>
 <% else %>
-  <% #= link_to file_system.description, show_modal_upload_path(id: file_system.id), remote: true %>
   <%= link_to file_system.description, show_modal_upload_path(id: file_system.id) , remote: true, data: { target: '#uploadpost', toggle: 'modal' }, class: 'nav-link'%>
 <% end %>
